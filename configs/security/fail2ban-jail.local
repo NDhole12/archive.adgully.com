@@ -1,0 +1,76 @@
+# Fail2ban Configuration for Archive.adgully.com
+# Copy to: /etc/fail2ban/jail.local
+
+[DEFAULT]
+# Ban settings
+bantime = 3600         # 1 hour
+findtime = 600         # 10 minutes
+maxretry = 5           # 5 attempts
+
+# Email notifications (configure if needed)
+destemail = admin@adgully.com
+sendername = Fail2Ban-Archive
+action = %(action_mwl)s  # Ban and email with logs
+
+# Ignore IPs (add your IPs here)
+ignoreip = 127.0.0.1/8 ::1
+
+[sshd]
+enabled = true
+port = 22
+logpath = %(sshd_log)s
+backend = %(sshd_backend)s
+maxretry = 3
+bantime = 7200  # 2 hours for SSH
+
+[nginx-http-auth]
+enabled = true
+port = http,https
+logpath = /var/log/nginx/error.log
+maxretry = 3
+
+[nginx-noscript]
+enabled = true
+port = http,https
+logpath = /var/log/nginx/access.log
+maxretry = 6
+
+[nginx-badbots]
+enabled = true
+port = http,https
+logpath = /var/log/nginx/access.log
+maxretry = 2
+
+[nginx-noproxy]
+enabled = true
+port = http,https
+logpath = /var/log/nginx/access.log
+maxretry = 2
+
+[nginx-limit-req]
+enabled = true
+port = http,https
+logpath = /var/log/nginx/error.log
+
+[php-url-fopen]
+enabled = true
+port = http,https
+logpath = /var/log/nginx/access.log
+
+# Custom filter for repeated 404s
+[nginx-404]
+enabled = true
+port = http,https
+logpath = /var/log/nginx/access.log
+filter = nginx-404
+maxretry = 20
+findtime = 120
+bantime = 600
+
+# MySQL/MariaDB brute force (if remote access enabled)
+[mysqld-auth]
+enabled = false  # Enable if MySQL is accessible remotely
+port = 3306
+logpath = /var/log/mysql/error.log
+maxretry = 3
+bantime = 7200

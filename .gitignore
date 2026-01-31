@@ -1,0 +1,81 @@
+# Gitignore for Archive.adgully.com Migration Project
+
+# Sensitive Information
+*.env
+*.env.*
+.env.local
+.env.production
+**/config/database.php
+**/config/secrets.*
+
+# Backup Files
+backups/
+*.sql
+*.sql.gz
+*.tar.gz
+*.zip
+*.bak
+*.backup
+*.dump
+
+# Logs
+*.log
+logs/
+*.log.*
+
+# Temporary Files
+tmp/
+temp/
+*.tmp
+*.cache
+
+# OS Files
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Editor Files
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+.*.swp
+
+# Reports
+*_report_*.txt
+deprecated_functions_report*.txt
+
+# SSH Keys
+*.pem
+*.key
+id_rsa*
+*.ppk
+
+# Database Credentials
+mysql_passwords.txt
+db_credentials.txt
+
+# Server-specific
+server-info.txt
+server_passwords.txt
+
+# Node modules (if using any Node tools)
+node_modules/
+
+# Composer vendor (if using PHP tools locally)
+vendor/
+
+# Test outputs
+test_results/
+coverage/
+
+# Local development
+.local/
+local/
+
+# Archives
+*.tar
+*.gz
+*.bz2
+*.xz

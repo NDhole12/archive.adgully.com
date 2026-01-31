@@ -1,0 +1,101 @@
+# Archive.adgully.com MariaDB Configuration
+# Copy to: /etc/mysql/mariadb.conf.d/99-archive-custom.cnf
+
+[client]
+port = 3306
+socket = /var/run/mysqld/mysqld.sock
+default-character-set = utf8mb4
+
+[mysql]
+default-character-set = utf8mb4
+
+[mysqld]
+# Basic Settings
+user = mysql
+pid-file = /var/run/mysqld/mysqld.pid
+socket = /var/run/mysqld/mysqld.sock
+port = 3306
+basedir = /usr
+datadir = /var/lib/mysql
+tmpdir = /tmp
+lc-messages-dir = /usr/share/mysql
+skip-external-locking
+
+# Character Set and Collation
+character-set-server = utf8mb4
+collation-server = utf8mb4_unicode_ci
+init_connect = 'SET NAMES utf8mb4'
+
+# Connection Settings
+max_connections = 200
+connect_timeout = 10
+wait_timeout = 600
+max_allowed_packet = 64M
+thread_cache_size = 128
+sort_buffer_size = 4M
+bulk_insert_buffer_size = 16M
+tmp_table_size = 64M
+max_heap_table_size = 64M
+
+# Query Cache (deprecated in newer MariaDB versions)
+# Only enable if using older versions
+# query_cache_type = 0
+# query_cache_size = 0
+
+# Logging
+log_error = /var/log/mysql/error.log
+log_warnings = 2
+
+# Slow Query Log
+slow_query_log = 1
+slow_query_log_file = /var/log/mysql/mysql-slow.log
+long_query_time = 2
+log_queries_not_using_indexes = 0
+
+# Binary Logging (for replication/backup)
+# Uncomment if needed
+# log_bin = /var/log/mysql/mysql-bin.log
+# expire_logs_days = 7
+# max_binlog_size = 100M
+
+# InnoDB Settings
+innodb_buffer_pool_size = 512M
+innodb_log_file_size = 128M
+innodb_file_per_table = 1
+innodb_flush_method = O_DIRECT
+innodb_flush_log_at_trx_commit = 2
+innodb_lock_wait_timeout = 50
+
+# InnoDB Performance
+innodb_io_capacity = 200
+innodb_io_capacity_max = 2000
+innodb_read_io_threads = 4
+innodb_write_io_threads = 4
+
+# MyISAM Settings (if using MyISAM tables)
+key_buffer_size = 128M
+read_buffer_size = 2M
+read_rnd_buffer_size = 1M
+myisam_sort_buffer_size = 64M
+
+# Table Cache
+table_open_cache = 400
+table_definition_cache = 400
+
+# Network Settings
+bind-address = 127.0.0.1  # Only allow local connections
+skip-name-resolve = 1      # Don't resolve hostnames
+
+# Security
+local-infile = 0           # Disable LOAD DATA LOCAL INFILE
+
+# Performance Schema (optional, uses memory)
+performance_schema = OFF
+
+[mysqldump]
+quick
+quote-names
+max_allowed_packet = 64M
+
+[isamchk]
+key_buffer_size = 16M
