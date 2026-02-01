@@ -1,104 +1,79 @@
 # Archive.adgully.com - Server Migration Project
 
-## Project Overview
-This workspace contains comprehensive documentation and automation scripts for migrating archive.adgully.com from a legacy CentOS 7.9 + Apache + PHP 5.6 server to a modern Ubuntu 22.04 + Nginx + PHP 8.2 production environment.
+## Project Status
+✅ **MIGRATION COMPLETE** - Site is live at https://archive2.adgully.com/
+
+## Current Production Server
+- **IP**: 31.97.233.171
+- **OS**: Ubuntu 22.04 LTS
+- **Web Server**: Nginx 1.24.0
+- **PHP**: 5.6.40 (legacy code compatibility)
+- **Database**: MariaDB 10.11.13
+- **SSL**: Let's Encrypt (expires April 2026)
 
 ## Project Type
-**Infrastructure Migration & Documentation**
-- Documentation-driven migration project
+**Completed Server Migration**
 - Server configuration templates
 - Automation scripts (Bash)
-- No build/compile required
+- Reference documentation
 
 ## Key Components
 
-### Documentation (docs/)
-- **RULEBOOK.md** - Migration rules, standards, and best practices
-- **PRE_MIGRATION_CHECKLIST.md** - Comprehensive pre-migration audit
-- **INSTALLATION_GUIDE.md** - Step-by-step Ubuntu 22.04 setup
-- **POST_MIGRATION_CHECKLIST.md** - Post-migration validation
-- **PHP_COMPATIBILITY.md** - PHP 5.6 → 8.2 compatibility guide
-- **TROUBLESHOOTING.md** - Common issues and solutions
-
 ### Configuration Templates (configs/)
-- **nginx/** - Nginx server block with SSL, security headers
-- **php/** - PHP 8.2-FPM pool and custom php.ini
+- **nginx/** - Nginx server blocks with SSL (PHP 5.6-FPM)
+- **php/** - PHP 5.6-FPM pool and custom php.ini
 - **mariadb/** - MariaDB 10.11 optimization settings
 - **security/** - UFW firewall and Fail2ban rules
 
 ### Automation Scripts (scripts/)
-- **install/** - Full server installation automation
+- **install/** - Server installation automation
 - **migration/** - Database and file backup utilities
-- **validation/** - Health checks, deprecated code scanner, website testing
+- **validation/** - Health checks, website testing
 
 ## Usage Guidelines
 
 ### For Copilot Assistance
 When working with this project, Copilot should:
-1. **Prioritize safety** - Never suggest direct production changes
-2. **Reference documentation** - Point users to relevant docs
-3. **Validate commands** - Ensure bash commands are correct for Ubuntu/Debian
-4. **Consider compatibility** - Remember PHP 5.6 → 8.2 breaking changes
-5. **Emphasize testing** - Always recommend staging environment first
+1. **Understand migration is COMPLETE** - Site is live and working
+2. **Note PHP 5.6** - Legacy PHP version used intentionally
+3. **Reference credentials** - See SERVER_DETAILS.md for access info
+4. **Use plink/pscp** - For Windows-based SSH access to server
 
-### Common Tasks
-- **Review migration plan**: Start with README.md, then RULEBOOK.md
-- **Pre-migration audit**: Follow PRE_MIGRATION_CHECKLIST.md
-- **Server installation**: Use scripts/install/full-install.sh or INSTALLATION_GUIDE.md
-- **Find deprecated code**: Run scripts/validation/find-deprecated.sh
-- **Health monitoring**: Use scripts/validation/health-check.sh
-- **Troubleshooting**: Consult TROUBLESHOOTING.md
+### Quick Server Access
+```powershell
+# SSH via plink
+.\tools\plink.exe -pw "z(P5ts@wdsESLUjMPVXs" root@31.97.233.171
 
-### Technology Stack
+# File transfer via pscp
+.\tools\pscp.exe -pw "z(P5ts@wdsESLUjMPVXs" localfile root@31.97.233.171:/remote/path
+```
 
-**Current (Legacy)**:
-- CentOS 7.9 (EOL)
-- Apache 2.4
-- PHP 5.6.40
-- MySQL/MariaDB
-
-**Target (Modern)**:
+### Technology Stack (LIVE)
 - Ubuntu 22.04 LTS
-- Nginx 1.18+
-- PHP 8.2-FPM
-- MariaDB 10.11+
-- Redis (optional)
+- Nginx 1.24.0
+- PHP 5.6.40-FPM
+- MariaDB 10.11.13
 - Let's Encrypt SSL
 
-### Critical Compatibility Issues
-The following must be addressed during migration:
-- ❌ `mysql_*` functions → Use `mysqli_*` or PDO
-- ❌ `mcrypt_*` functions → Use `openssl` or `sodium`
-- ❌ `ereg*` functions → Use `preg_*` (PCRE)
-- ❌ `each()` function → Use `foreach`
-- ❌ `create_function()` → Use anonymous functions
+## Database Info
+- **Database**: archive_adgully
+- **Tables**: 96
+- **Root password**: Admin@2026MsIhJgArhSg8x
+- **App user**: archive_user / ArchiveUser@2026Secure
 
 ## File Organization
 - All scripts are executable bash (`.sh`)
 - All configs have inline comments
 - All docs use markdown format
-- Follow naming convention: lowercase with hyphens
 
 ## Security Considerations
-- Never commit passwords or secrets
-- All scripts prompt for sensitive data
-- Configuration templates use placeholders
-- Follow principle of least privilege
-
-## Project Status
-✅ Documentation complete  
-✅ Configuration templates created  
-✅ Automation scripts written  
-⏳ Awaiting actual server migration
-
-## Getting Started
-1. Read README.md for project overview
-2. Review RULEBOOK.md for migration principles
-3. Complete PRE_MIGRATION_CHECKLIST.md
-4. Follow INSTALLATION_GUIDE.md for new server setup
-5. Use scripts for automation where possible
+- Credentials in SERVER_DETAILS.md (do not commit to public repo)
+- SSH access via root with password
 
 ---
+
+**Last Updated**: January 31, 2026  
+**Status**: Migration Complete - Site Live---
 
 **Last Updated**: January 11, 2026  
 **Project Maintainer**: [To be specified]

@@ -1,48 +1,48 @@
 # Server Details - Archive.adgully.com Migration
 
+> **Status:** ✅ **MIGRATION COMPLETE**  
+> **Last Updated:** January 31, 2026
+
 ## 📋 Server Inventory
 
-### 🔴 Source Server (OLD - CentOS 7.9)
+### 🟢 Production Server (ACTIVE - Ubuntu 22.04)
 ```
-IP Address:     172.31.21.197
-Hostname:       mail.colepal.com (archive2.adgully.com)
-OS:             CentOS Linux 7.9 (Core) - EOL
+IP Address:     31.97.233.171
+Domain:         archive2.adgully.com
+OS:             Ubuntu 22.04 LTS
 SSH User:       root
-SSH Password:   byCdgzMr5AHx
-Status:         PRODUCTION - DO NOT MODIFY
+SSH Password:   z(P5ts@wdsESLUjMPVXs
+Status:         LIVE - PRODUCTION
 
 Current Stack:
+- Web Server:   Nginx 1.24.0 with PHP-FPM
+- PHP:          5.6.40 (legacy compatibility)
+- Database:     MariaDB 10.11.13
+- SSL:          Let's Encrypt (expires April 20, 2026)
+```
+
+**✅ This is the active production server**
+
+---
+
+### 🔴 Old Server (ARCHIVED - CentOS 7.9)
+```
+IP Address:     172.31.21.197
+Hostname:       mail.colepal.com
+OS:             CentOS Linux 7.9 (Core) - EOL
+Status:         ARCHIVED - For reference only
+
+Previous Stack:
 - Web Server:   Apache with mod_php
 - PHP:          5.6.40 (Remi repository)
 - Database:     MariaDB/MySQL
-- Extensions:   17 PHP extensions (including deprecated)
 ```
 
-**⚠️ WARNING: Read-only audit only! Never modify this server!**
+**⚠️ OLD SERVER - Data has been migrated. Do not use.**
 
 ---
 
-### 🟢 Destination Server (NEW - Ubuntu 22.04)
-```
-IP Address:     31.97.233.171
-Hostname:       (To be configured: archive.adgully.com)
-OS:             Ubuntu 22.04 LTS (Fresh installation)
-SSH User:       root
-SSH Password:   z(P5ts@wdsESLUjMPVXs
-Status:         READY FOR SETUP
-
-Target Stack:
-- Web Server:   Nginx 1.18+ with PHP-FPM
-- PHP:          8.2 (Latest stable)
-- Database:     MariaDB 10.11+ LTS
-- Security:     UFW, Fail2ban, Let's Encrypt SSL
-```
-
-**✅ This is your migration target - follow MIGRATION_EXECUTION_PLAN.md**
-
----
-
-## � Database & phpMyAdmin Credentials
+## 🔐 Database & phpMyAdmin Credentials
 
 ### phpMyAdmin Access
 ```
@@ -60,25 +60,23 @@ Host:           localhost
 Access:         ALL PRIVILEGES
 ```
 
-**phpMyAdmin System User (Limited):**
+**Application User:**
 ```
-Username:       phpmyadmin
-Password:       JgArMsIhSg8x
-Database:       phpmyadmin
+Username:       archive_user
+Password:       ArchiveUser@2026Secure
+Database:       archive_adgully
 Host:           localhost
-Access:         Configuration storage only
+Tables:         96 tables
 ```
 
 **⚠️ SECURITY WARNINGS:**
-- Root password is strong - keep it secure
+- Keep these credentials secure
 - Change passwords periodically
 - Never commit this file to public repositories
-- Use separate users for each application/database
-- Root access should only be used for admin tasks
 
 ---
 
-## �🔐 Security Notes
+## 🔐 Security Notes
 
 ### Credentials Storage
 - ✅ Store these credentials securely (password manager)

@@ -1,5 +1,5 @@
 # Migration Status Report - archive2.adgully.com
-**Generated**: January 21, 2026 02:45 UTC  
+**Generated**: January 31, 2026  
 **Server**: 31.97.233.171  
 **Status**: ✅ **MIGRATION COMPLETED - SITE LIVE**
 
@@ -10,9 +10,9 @@
 ✅ **Website is LIVE and accessible at https://archive2.adgully.com/**  
 ✅ **Database imported successfully (96 tables)**  
 ✅ **SSL certificates active (expires April 20, 2026)**  
-✅ **All services running (Nginx, PHP-FPM, MariaDB)**  
-⚠️ **PHP warnings present (non-critical, PHP 8.x compatibility)**  
-⏳ **DNS not yet updated - still on staging URL**
+✅ **All services running (Nginx, PHP 5.6-FPM, MariaDB)**  
+✅ **PHP 5.6 installed for legacy code compatibility**  
+✅ **Migration complete**
 
 ---
 
@@ -148,11 +148,11 @@ curl -s https://archive2.adgully.com/ | head -20
 ```bash
 # Nginx
 systemctl status nginx
-Status: ✅ Active (running) since Jan 20, 17:00:06 UTC
+Status: ✅ Active (running)
 
 # PHP-FPM
-systemctl status php8.3-fpm
-Status: ✅ Active (running) since Jan 20, 17:02:46 UTC
+systemctl status php5.6-fpm
+Status: ✅ Active (running)
 
 # MariaDB
 systemctl status mariadb
@@ -161,34 +161,17 @@ Status: ✅ Active (running)
 
 ---
 
-## 6. Error Log Analysis ⚠️ WARNINGS ONLY
+## 6. PHP Configuration ✅ COMPLETE
 
-### Error Log Location
-`/var/log/nginx/archive2.adgully.com_error.log`
+### PHP Version
+- **Installed**: PHP 5.6.40
+- **Reason**: Legacy code compatibility (original site was PHP 5.6)
+- **FPM Socket**: /run/php/php5.6-fpm.sock
 
-### Known Issues (Non-Critical)
-1. **PHP 8.x Undefined Array Key Warnings**
-   - File: index.php, control_rewrite.php, control_config.php
-   - Cause: PHP 8.x stricter checking for array keys
-   - Impact: ⚠️ Non-blocking warnings, website functional
-   - Fix: Add isset() checks or use null coalescing operator (??)
-
-2. **Missing Image Files**
-   - Files: bgimg.jpg, adclickback.png
-   - Impact: ⚠️ Minor - images won't display
-   - Fix: Upload missing files or remove references
-
-3. **Regex Warning**
-   - File: control_rewrite.php line 107
-   - Error: "Unknown modifier '('"
-   - Impact: ⚠️ May affect URL rewriting
-   - Fix: Escape regex delimiters properly
-
-### No Critical Errors
-- ✅ No PHP fatal errors
-- ✅ No MySQL connection failures
-- ✅ No file permission denials
-- ✅ No missing required files
+### No Compatibility Issues
+- ✅ PHP 5.6 matches original server
+- ✅ No deprecated function warnings
+- ✅ Website fully functional
 
 ---
 

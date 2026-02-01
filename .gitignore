@@ -33,6 +33,7 @@ temp/
 .DS_Store
 Thumbs.db
 desktop.ini
+nul
 
 # Editor Files
 .vscode/
